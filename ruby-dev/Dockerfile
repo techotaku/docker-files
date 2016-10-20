@@ -4,11 +4,12 @@ MAINTAINER Ian Li <git@ianli.xyz>
 
 RUN apt-get update && apt-get install --no-install-recommends -y \ 
     build-essential ruby ruby-dev \
-	&& rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-COPY ../ubuntu-cn/sources.list /etc/apt/sources.list
+ADD https://raw.githubusercontent.com/techotaku/docker-files/master/ubuntu-cn/sources.list /etc/apt/sources.list
 
 RUN gem update --system && gem install bundler \
-    && gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+    && gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/ \
+    && bundle config mirror.https://rubygems.org https://gems.ruby-china.org
 
 CMD ["/bin/bash"]
