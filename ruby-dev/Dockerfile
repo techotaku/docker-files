@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER Ian Li <git@ianli.xyz>
 
 RUN apt-get update && apt-get install --no-install-recommends -y \ 
-    build-essential ruby ruby-dev \
+    build-essential git ruby ruby-dev \
     && rm -rf /var/lib/apt/lists/*
 
 ADD https://raw.githubusercontent.com/techotaku/docker-files/master/ubuntu-cn/sources.list /etc/apt/sources.list
