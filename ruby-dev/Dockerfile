@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Ian Li <git@ianli.xyz>
+MAINTAINER Ian Li <OpenSource@ianli.xyz>
 
 RUN apt-get update && apt-get install --no-install-recommends -y \ 
     build-essential git ruby ruby-dev \

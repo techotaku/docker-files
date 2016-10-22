@@ -1,6 +1,6 @@
 FROM tarot13/ruby-dev:latest
 
-MAINTAINER Ian Li <git@ianli.xyz>
+MAINTAINER Ian Li <OpenSource@ianli.xyz>
 
 RUN gem install jekyll
 
