@@ -2,14 +2,13 @@
 #                            OFFICIAL UBUNTU REPOS                             #
 #------------------------------------------------------------------------------#
 
-# By https://repogen.simplylinux.ch
 
 ###### Ubuntu Main Repos
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse 
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse 
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty main 
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty main 
 
 ###### Ubuntu Update Repos
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse 
-deb http://cn.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse 
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse 
-deb-src http://cn.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse 
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-security main 
+deb http://cn.archive.ubuntu.com/ubuntu/ zesty-updates main 
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-security main 
+deb-src http://cn.archive.ubuntu.com/ubuntu/ zesty-updates main 
