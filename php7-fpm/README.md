@@ -4,13 +4,15 @@
 * exif  
 * gd  
 * mcrypt  
+* memcached  
 * mysqli  
 * opcache  
 * pdo_mysql  
 * redis  
 * sockets  
 * tokenizer  
+* xdebug  
 * zip  
 
 ## Usage
-`docker run -d --name php -v ~/www:/www --link mysql:mysql --link redis:redis tarot13/php7-fpm`
+`docker run -d --name php -v ~/www:/www --link mysql:mysql --link redis:myredis tarot13/php7-fpm`
