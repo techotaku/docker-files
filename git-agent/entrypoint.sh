@@ -13,6 +13,7 @@ else
 fi
 
 cd $GIT_PATH
+git fetch
 
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
