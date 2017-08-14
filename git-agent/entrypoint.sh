@@ -13,9 +13,11 @@ else
 fi
 
 cd $GIT_PATH
-git fetch
 
 UPSTREAM=${1:-'@{u}'}
+
+git fetch "$UPSTREAM"
+
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
@@ -23,8 +25,8 @@ BASE=$(git merge-base @ "$UPSTREAM")
 if [ $LOCAL = $REMOTE ]; then
     echo "Already up to date."
 elif [ $LOCAL = $BASE ]; then
-    echo "Pulling..."
-    git pull
+    echo "Updating..."
+    git merge "$UPSTREAM"
 fi
 
 cd $OLDPWD
