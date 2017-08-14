@@ -14,19 +14,20 @@ fi
 
 cd $GIT_PATH
 
-UPSTREAM=${1:-'@{u}'}
+BRANCH=$(git name-rev --name-only HEAD)
+REMOTE=$(git config branch.$BRANCH.remote)
 
-git fetch "$UPSTREAM"
+git fetch "$REMOTE"
 
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse "$UPSTREAM")
-BASE=$(git merge-base @ "$UPSTREAM")
+VERSION_LOCAL=$(git rev-parse @)
+VERSION_REMOTE=$(git rev-parse "$REMOTE")
+VERSION_BASE=$(git merge-base @ "$REMOTE")
 
-if [ $LOCAL = $REMOTE ]; then
+if [ $VERSION_LOCAL = $VERSION_REMOTE ]; then
     echo "Already up to date."
-elif [ $LOCAL = $BASE ]; then
+elif [ $VERSION_LOCAL = $VERSION_BASE ]; then
     echo "Updating..."
-    git merge "$UPSTREAM"
+    git merge "$REMOTE/$BRANCH"
 fi
 
 cd $OLDPWD
