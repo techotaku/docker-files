@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:edge
 
 MAINTAINER Ian Li <OpenSource@ianli.xyz>
 
