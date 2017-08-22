@@ -2,7 +2,7 @@ FROM haproxy:alpine
 
 MAINTAINER Ian Li <OpenSource@ianli.xyz>
 
-RUN apk add --no-cache curl && \
+RUN apk add --no-cache bash curl && \
     curl -O https://raw.githubusercontent.com/tests-always-included/mo/master/mo && \
     mv mo /usr/local/bin && \
     chmod +x /usr/local/bin/mo && \
