@@ -1,6 +1,6 @@
-FROM alpine:edge
+FROM alpine
 
-MAINTAINER Ian Li <OpenSource@ianli.xyz>
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 COPY entrypoint.sh /entrypoint.sh
 

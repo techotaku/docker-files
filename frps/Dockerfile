@@ -1,10 +1,11 @@
-FROM alpine:3.6
+FROM alpine
 
-ENV FRP_VERSION 0.13.0
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
-RUN apk add --no-cache wget
+ARG FRP_VERSION 0.14.1
 
-RUN wget --no-check-certificate https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_amd64.tar.gz && \ 
+RUN apk add --no-cache wget && \ 
+    wget --no-check-certificate https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_amd64.tar.gz && \ 
     tar xzf frp_${FRP_VERSION}_linux_amd64.tar.gz && \
     cd frp_${FRP_VERSION}_linux_amd64 && \
     mv frps /frps && \

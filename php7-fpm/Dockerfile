@@ -1,6 +1,6 @@
 FROM php:7-fpm-alpine
 
-MAINTAINER Ian Li <OpenSource@ianli.xyz>
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --update --no-cache bash musl nano cyrus-sasl libpng libmcrypt libmemcached freetype libjpeg-turbo libpng libwebp libxpm \
     tzdata autoconf g++ make libmemcached-dev cyrus-sasl-dev libjpeg-turbo-dev libwebp-dev libpng-dev freetype-dev libxpm-dev libmcrypt-dev && \

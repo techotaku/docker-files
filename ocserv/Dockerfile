@@ -1,6 +1,8 @@
-FROM alpine:3.6
+FROM alpine
 
-MAINTAINER Ian Li <OpenSource@ianli.xyz>
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
+
+ARG OC_VERSION=0.11.9
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -9,15 +11,16 @@ RUN apk add --update nano iptables \
     build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev && \
     set -x && \
     cd /root && \
-    wget ftp://ftp.infradead.org/pub/ocserv/ocserv-0.11.8.tar.xz && \
-    tar xJf ocserv-0.11.8.tar.xz && \
-    rm ocserv-0.11.8.tar.xz && \
-    cd ocserv-0.11.8 && \
+    OC_FILE="ocserv-$OC_VERSION" && \
+    wget ftp://ftp.infradead.org/pub/ocserv/$OC_FILE.tar.xz && \
+    tar xJf $OC_FILE.tar.xz && \
+    rm $OC_FILE.tar.xz && \
+    cd $OC_FILE && \
     ./configure && \
     make -j"$(nproc)" && \
     make install && \
     cd /root && \
-    rm -rf ocserv-0.11.8 && \
+    rm -rf $OC_FILE && \
     apk del build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev && \
     rm -rf /var/cache/apk/* && \
     mkdir /var/lib/ocserv && \

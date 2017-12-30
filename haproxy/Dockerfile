@@ -1,6 +1,6 @@
 FROM haproxy:alpine
 
-MAINTAINER Ian Li <OpenSource@ianli.xyz>
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --no-cache bash curl && \
     curl -O https://raw.githubusercontent.com/tests-always-included/mo/master/mo && \
