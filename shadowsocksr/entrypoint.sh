@@ -24,23 +24,7 @@ if [ "$SSR_API_INTERFACE" -eq "sspanelv3ssr" ] && [ ! -z "$SSR_DB_HOST" ] && [ !
     echo "[Info] Api interface sspanelv3ssr detected."
     export SSR_ENABLE="TRUE"
 
-    echo "[Info] Updating SQL DB configurations..."
-    if [ -z "$SSR_DB_PORT" ]; then
-        export SSR_DB_PORT=3306
-    fi
-    if [ -z "$SSR_DB_MUL" ]; then
-        export SSR_DB_MUL=1.0
-    fi
-    if [ -z "$SSR_DB_SSL" ]; then
-        export SSR_DB_SSL=0
-    fi
-
-    cat /etc/mo/template/usermysql.json.template | mo > usermysql.json
-fi
-
-if [ ! -z "$SSR_ENABLE" ]; then
-    echo ""
-    echo "[Info] Updating general configurations..."
+    echo "[Info] Updating connection configuration..."
 
     if [ -z "$SSR_PORT" ]; then
         export SSR_PORT=8188
@@ -62,8 +46,28 @@ if [ ! -z "$SSR_ENABLE" ]; then
         export SSR_OBFS=tls1.2_ticket_auth
     fi
 
-    cat /etc/mo/template/userapiconfig.py.template | mo > userapiconfig.py
     cat /etc/mo/template/user-config.json.template | mo > user-config.json
+
+    echo "[Info] Updating SQL DB configuration..."
+
+    if [ -z "$SSR_DB_PORT" ]; then
+        export SSR_DB_PORT=3306
+    fi
+    if [ -z "$SSR_DB_MUL" ]; then
+        export SSR_DB_MUL=1.0
+    fi
+    if [ -z "$SSR_DB_SSL" ]; then
+        export SSR_DB_SSL=0
+    fi
+
+    cat /etc/mo/template/usermysql.json.template | mo > usermysql.json
+fi
+
+if [ ! -z "$SSR_ENABLE" ]; then
+    echo ""
+    echo "[Info] Updating general configurations..."
+
+    cat /etc/mo/template/userapiconfig.py.template | mo > userapiconfig.py
 
     echo "[Info] All configurations updated. Starting service..."
     exec python server.py "$@"
