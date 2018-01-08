@@ -17,10 +17,15 @@ RUN apk add --no-cache bash curl git unzip && \
     chmod +x shadowsocksr-manyuser/*.sh  && \
     chmod +x shadowsocksr-manyuser/shadowsocks/*.sh && \
     curl -L https://github.com/techotaku/docker-files/raw/master/shadowsocksr/entrypoint.sh -o /entrypoint.sh && \
-    chmod +x /entrypoint.sh && \
     mkdir -p /etc/mo/template && \
     curl -L https://github.com/techotaku/docker-files/raw/master/shadowsocksr/template/userapiconfig.py.template -o /etc/mo/template/userapiconfig.py.template && \
     curl -L https://github.com/techotaku/docker-files/raw/master/shadowsocksr/template/user-config.json.template -o /etc/mo/template/user-config.json.template && \
-    curl -L https://github.com/techotaku/docker-files/raw/master/shadowsocksr/template/usermysql.json.template -o /etc/mo/template/usermysql.json.template
+    curl -L https://github.com/techotaku/docker-files/raw/master/shadowsocksr/template/usermysql.json.template -o /etc/mo/template/usermysql.json.template && \
+    cd /root/shadowsocksr-manyuser && \
+    rm -f userapiconfig.py > /dev/null 2>&1 && \
+    rm -f user-config.json > /dev/null 2>&1 && \
+    rm -f usermysql.json > /dev/null 2>&1 && \
+    rm -f mudb.json > /dev/null 2>&1 && \
+    chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
