@@ -1,0 +1,23 @@
+{
+    "server": "0.0.0.0",
+    "password": "meaningless",
+    "server_port": {{SSR_PORT}},
+    "additional_ports" :
+    {
+        "{{SSR_PORT}}": {
+            "passwd": "{{SSR_PASSWD}}",
+            "method": "{{SSR_METHOD}}",
+            "protocol": "{{SSR_PROTOCOL}}",
+            "protocol_param": "#",
+            "obfs": "{{SSR_OBFS}}",
+            "obfs_param": ""
+        }
+    },
+    "additional_ports_only" : true,
+    "timeout": 120,
+    "udp_timeout": 60,
+    "dns_ipv6": false,
+    "connect_verbose_info": 0,
+    "redirect": "",
+    "fast_open": true
+}

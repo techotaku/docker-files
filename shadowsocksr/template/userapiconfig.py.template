@@ -1,0 +1,9 @@
+API_INTERFACE = '{{SSR_API_INTERFACE}}'
+UPDATE_TIME = 60
+SERVER_PUB_ADDR = '{{PUBLIC_IP}}'
+
+# MUDB
+MUDB_FILE = 'mudb.json'
+
+# Mysql
+MYSQL_CONFIG = 'usermysql.json'
