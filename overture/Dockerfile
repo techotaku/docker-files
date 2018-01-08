@@ -9,9 +9,7 @@ RUN apk add --no-cache curl git unzip && \
     unzip overture.zip -d ./overture/ && \
     mv overture/overture-linux-amd64 /usr/sbin/overture && \
     rm -rf ./overture/ && \
-    rm overture.zip && \
-    apk del curl git unzip && \
-    /usr/sbin/overture -h
+    rm overture.zip
 
 ENTRYPOINT ["/usr/sbin/overture"]
 
