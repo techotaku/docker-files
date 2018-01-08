@@ -17,6 +17,9 @@ if [ "$SSR_API_INTERFACE" == "mudbjson" ] && [ -f "/etc/shadowsocksr/mudb.json" 
     export SSR_ENABLE="TRUE"
 
     echo "[Info] Linking file \"mudb.json\"..."
+    if [ -f "mudb.json" ]; then
+        rm -f mudb.json > /dev/null 2>&1
+    fi
     ln -s /etc/shadowsocksr/mudb.json mudb.json
 fi
 
