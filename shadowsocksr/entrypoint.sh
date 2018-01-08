@@ -12,7 +12,7 @@ cd /root/shadowsocksr-manyuser
 
 export SSR_ENABLE=""
 
-if [ "$SSR_API_INTERFACE" -eq "mudbjson" ] && [ -f "/etc/shadowsocksr/mudb.json" ]; then
+if [ "$SSR_API_INTERFACE" == "mudbjson" ] && [ -f "/etc/shadowsocksr/mudb.json" ]; then
     echo "[Info] Api interface mudbjson detected."
     export SSR_ENABLE="TRUE"
 
@@ -20,7 +20,7 @@ if [ "$SSR_API_INTERFACE" -eq "mudbjson" ] && [ -f "/etc/shadowsocksr/mudb.json"
     ln -s /etc/shadowsocksr/mudb.json mudb.json
 fi
 
-if [ "$SSR_API_INTERFACE" -eq "sspanelv3ssr" ] && [ ! -z "$SSR_DB_HOST" ] && [ ! -z "$SSR_DB_USER" ] && [ ! -z "$SSR_DB_PWD" ] && [ ! -z "$SSR_DB_NAME" ] && [ ! -z "$SSR_DB_NODE" ]; then
+if [ "$SSR_API_INTERFACE" == "sspanelv3ssr" ] && [ ! -z "$SSR_DB_HOST" ] && [ ! -z "$SSR_DB_USER" ] && [ ! -z "$SSR_DB_PWD" ] && [ ! -z "$SSR_DB_NAME" ] && [ ! -z "$SSR_DB_NODE" ]; then
     echo "[Info] Api interface sspanelv3ssr detected."
     export SSR_ENABLE="TRUE"
 
