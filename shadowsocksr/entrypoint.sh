@@ -70,6 +70,10 @@ if [ ! -z "$SSR_ENABLE" ]; then
     echo ""
     echo "[Info] Updating general configurations..."
 
+    if [ ! -z "$SSR_DNS" ]; then
+        echo "$SSR_DNS" > dns.conf
+    fi
+
     cat /etc/mo/template/userapiconfig.py.template | mo > userapiconfig.py
 
     echo "[Info] All configurations updated. Starting service..."
