@@ -3,7 +3,7 @@
 ## +Extensions    
 * exif  
 * gd  
-* mcrypt  
+* igbinary  
 * memcached  
 * mysqli  
 * opcache  
