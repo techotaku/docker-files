@@ -9,7 +9,8 @@ RUN apk add --no-cache nginx && \
     chmod +x entrypoint.sh && \
     mv entrypoint.sh / && \
     curl -L -O https://github.com/techotaku/docker-files/raw/master/nginx-php7/opcache-recommended.ini && \
-    mv opcache-recommended.ini /usr/local/etc/php/conf.d/
+    mv opcache-recommended.ini /usr/local/etc/php/conf.d/ && \
+    mkdir -p /run/nginx
 
 EXPOSE 80/tcp
 
