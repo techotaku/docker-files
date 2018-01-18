@@ -13,4 +13,4 @@ RUN apk add --no-cache bash curl && \
 
 ENTRYPOINT ["entrypoint.sh"]
 
-CMD ["-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+CMD ["-W", "-db", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
