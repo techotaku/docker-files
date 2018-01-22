@@ -7,4 +7,4 @@ RUN apk add --no-cache bash curl nano ca-certificates && \
     
 ENTRYPOINT ["/usr/local/bin/caddy"]
 
-["-agree", "-conf", "/etc/Caddyfile", "-log", "stdout", "-root", "/root/webroot"]
+CMD ["-agree", "-conf", "/etc/Caddyfile", "-log", "stdout", "-root", "/root/webroot"]
