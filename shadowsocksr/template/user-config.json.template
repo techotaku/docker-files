@@ -18,6 +18,6 @@
     "udp_timeout": 60,
     "dns_ipv6": false,
     "connect_verbose_info": 0,
-    "redirect": "{{SSR_REDIRECT}}",
+    "redirect": {{^SSR_REDIRECT}}""{{/SSR_REDIRECT}}{{#SSR_REDIRECT}}{{SSR_REDIRECT}}{{/SSR_REDIRECT}},
     "fast_open": true
 }
