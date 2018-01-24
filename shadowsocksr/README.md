@@ -16,6 +16,7 @@ sudo docker run -d --name shadowsocksr \
 ## Useful Env Vars    
 * **SSR_API_INTERFACE**: *Required.* Values: `mudbjson` (file `mudb.json` is required) or `sspanelv3ssr` (sql db configuration is required).    
 * **SSR_DNS**: *Optional.* Default is empty.    
+* **SSR_REDIRECT**: *Optional.* Default is empty.    
 * **SSR_PORT**: *Optional for `sspanelv3ssr`.* Default is `8188`.    
 * **SSR_PASSWD**: *Optional for `sspanelv3ssr`.* Single port shared password, default is `rEciTw`.    
 * **SSR_METHOD**: *Optional for `sspanelv3ssr`.* Default is `none`.    
