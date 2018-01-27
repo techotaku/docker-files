@@ -3,7 +3,7 @@ FROM alpine
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --no-cache bash curl nano ca-certificates && \
-    curl https://getcaddy.com | bash -s personal http.jwt,http.login,http.proxyprotocol,http.realip
+    curl https://getcaddy.com | bash -s personal http.ipfilter,http.jwt,http.login,http.proxyprotocol,http.realip
     
 ENTRYPOINT ["/usr/local/bin/caddy"]
 
