@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#export V2RAY_RAY_BUFFER_SIZE=1
+if [ -z "$V2RAY_HTTP_INTERNAL_PORT" ]; then
+    export V2RAY_HTTP_INTERNAL_PORT=8080
+fi
 
 if [ -z "$V2RAY_AID" ]; then
     export V2RAY_AID=32
