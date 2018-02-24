@@ -12,7 +12,7 @@ if [ -z "$V2RAY_LEVEL" ]; then
     export V2RAY_LEVEL=1
 fi
 
-if [ -z "$V2RAY_UUID"]; then
+if [ -z "$V2RAY_UUID" ]; then
     export V2RAY_UUID=`cat /proc/sys/kernel/random/uuid`
     echo "New UUID generated: ${V2RAY_UUID}."
 fi
