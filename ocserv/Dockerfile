@@ -2,7 +2,7 @@ FROM alpine
 
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
-ARG OC_VERSION=0.12.0
+ARG OC_VERSION=0.12.1
 
 COPY entrypoint.sh /entrypoint.sh
 
