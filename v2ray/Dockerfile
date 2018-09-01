@@ -2,7 +2,7 @@ FROM alpine
 
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
-ARG V2RAY_VER=3.36
+ARG V2RAY_VER=3.37
 
 RUN apk add --no-cache bash curl nano ca-certificates && \
     curl -L "https://github.com/v2ray/v2ray-core/releases/download/v${V2RAY_VER}/v2ray-linux-64.zip" -o /tmp/v2ray.zip && \
