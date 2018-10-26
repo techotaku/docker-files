@@ -2,7 +2,7 @@ FROM alpine
 
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
-RUN apk add --update --no-cache nano musl mbedtls pcre \
+RUN apk add --update --no-cache nano musl rng-tools mbedtls pcre \
     build-base linux-headers musl-dev mbedtls-dev pcre-dev asciidoc xmlto && \
     wget https://github.com/shadowsocksrr/shadowsocksr-libev/archive/master.zip && \
     unzip master.zip && \
