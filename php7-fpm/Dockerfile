@@ -1,8 +1,8 @@
-FROM php:fpm-alpine3.7
+FROM php:fpm-alpine
 
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
-RUN apk add --no-cache bash musl nano cyrus-sasl libmemcached freetype libjpeg-turbo libpng libwebp libxpm \
+RUN apk add --update bash musl nano cyrus-sasl libmemcached freetype libjpeg-turbo libpng libwebp libxpm \
     tzdata autoconf g++ make libmemcached-dev cyrus-sasl-dev libjpeg-turbo-dev libwebp-dev libpng-dev freetype-dev libxpm-dev && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
@@ -13,5 +13,6 @@ RUN apk add --no-cache bash musl nano cyrus-sasl libmemcached freetype libjpeg-t
     docker-php-ext-enable igbinary redis memcached && \ 
     docker-php-source delete && \
     apk del tzdata autoconf g++ make libmemcached-dev cyrus-sasl-dev libjpeg-turbo-dev libwebp-dev libpng-dev freetype-dev libxpm-dev && \
+    rm -rf /var/cache/apk/* && \
     curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
