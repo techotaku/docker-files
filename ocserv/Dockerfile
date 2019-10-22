@@ -1,28 +1,39 @@
-FROM alpine
-
-LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
+FROM alpine AS builder
 
 ARG OC_VERSION=0.12.5
 
-COPY entrypoint.sh /entrypoint.sh
-
-RUN apk add --update nano iptables \
-    musl openssl gnutls readline libnl3 lz4 lz4-libs libseccomp libev geoip \
-    build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev && \
+RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev protobuf-c-dev talloc-dev http-parser-dev krb5-dev && \
     set -x && \
     cd /root && \
-    OC_FILE="ocserv-$OC_VERSION" && \
-    wget ftp://ftp.infradead.org/pub/ocserv/$OC_FILE.tar.xz && \
-    tar xJf $OC_FILE.tar.xz && \
-    rm $OC_FILE.tar.xz && \
-    cd $OC_FILE && \
+    RADCLI_VERSION=`curl -s "https://github.com/radcli/radcli/releases/latest" | sed -n 's/^.*tag\/\(.*\)".*/\1/p'` && \
+    wget https://github.com/radcli/radcli/releases/download/1.2.11/radcli-$RADCLI_VERSION.tar.gz && \
+    tar xzf radcli-$RADCLI_VERSION.tar.gz && \
+    rm radcli-$RADCLI_VERSION.tar.gz && \
+    cd radcli-$RADCLI_VERSION && \
     ./configure && \
     make -j"$(nproc)" && \
     make install && \
     cd /root && \
-    rm -rf $OC_FILE && \
-    apk del build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev && \
-    rm -rf /var/cache/apk/* && \
+    wget ftp://ftp.infradead.org/pub/ocserv/ocserv-$OC_VERSION.tar.xz && \
+    tar xJf ocserv-$OC_VERSION.tar.xz && \
+    rm ocserv-$OC_VERSION.tar.xz && \
+    cd ocserv-$OC_VERSION && \
+    ./configure && \
+    make -j"$(nproc)" && \
+    make install
+
+FROM alpine
+
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
+
+COPY entrypoint.sh /entrypoint.sh
+COPY --from=builder /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so.4.3.0
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
+COPY --from=builder /usr/local/sbin/* /usr/local/sbin/
+
+RUN apk add --no-cache iptables gnutls readline libseccomp libnl3 http-parser talloc lz4-libs krb5-libs libev protobuf-c geoip && \
+    ln -s /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so.4 && \
+    ln -s /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so && \
     mkdir /var/lib/ocserv && \
     chmod +x /entrypoint.sh
 
