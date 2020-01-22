@@ -6,7 +6,7 @@ RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev read
     set -x && \
     cd /root && \
     RADCLI_VERSION=`curl -s "https://github.com/radcli/radcli/releases/latest" | sed -n 's/^.*tag\/\(.*\)".*/\1/p'` && \
-    wget https://github.com/radcli/radcli/releases/download/1.2.11/radcli-$RADCLI_VERSION.tar.gz && \
+    wget https://github.com/radcli/radcli/releases/download/$RADCLI_VERSION/radcli-$RADCLI_VERSION.tar.gz && \
     tar xzf radcli-$RADCLI_VERSION.tar.gz && \
     rm radcli-$RADCLI_VERSION.tar.gz && \
     cd radcli-$RADCLI_VERSION && \
