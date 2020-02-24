@@ -3,16 +3,15 @@ FROM tarot13/php7-fpm
 LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 RUN apk add --no-cache nginx && \
-    sed 's/access_log \/var\/log\/nginx\/access\.log main;/access_log off;/g' -i /etc/nginx/nginx.conf && \
-    sed 's/\[::\]:9000/127\.0\.0\.1:9000/g' -i /usr/local/etc/php-fpm.d/zz-docker.conf && \
-    curl -L -O https://github.com/techotaku/docker-files/raw/master/nginx-php7/entrypoint.sh && \
-    chmod +x entrypoint.sh && \
-    mv entrypoint.sh / && \
-    curl -L -O https://github.com/techotaku/docker-files/raw/master/nginx-php7/opcache-recommended.ini && \
-    mv opcache-recommended.ini /usr/local/etc/php/conf.d/ && \
-    mkdir -p /run/nginx
+    sed 's/no/yes/g' -i /usr/local/etc/php-fpm.d/zz-docker.conf && \
+    sed 's/9000/127\.0\.0\.1:9000/g' -i /usr/local/etc/php-fpm.d/zz-docker.conf && \
+    echo listen.allowed_clients = 127.0.0.1 >> /usr/local/etc/php-fpm.d/zz-docker.conf && \
+    echo opcache.validate_timestamps=0 > /usr/local/etc/php/conf.d/opcache-recommended.ini && \
+    mkdir -p /run/nginx && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+	ln -sf /dev/stderr /var/log/nginx/error.log && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf
 
 EXPOSE 80/tcp
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["php-fpm && nginx"]
