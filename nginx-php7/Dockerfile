@@ -14,4 +14,4 @@ RUN apk add --no-cache nginx && \
 
 EXPOSE 80/tcp
 
-CMD ["php-fpm && nginx"]
+ENTRYPOINT ["php-fpm && nginx"]
