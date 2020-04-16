@@ -1,6 +1,6 @@
 FROM alpine AS builder
 
-ARG OC_VERSION=1.0.0
+ARG OC_VERSION=1.0.1
 
 RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev protobuf-c-dev talloc-dev http-parser-dev krb5-dev && \
     set -x && \
