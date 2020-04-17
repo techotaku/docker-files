@@ -10,7 +10,7 @@ else
 fi
 
 # Enable NAT forwarding
-iptables -t nat -A POSTROUTING -j MASQUERADE || echo "[Error] No permission to operate iptables."
+iptables -t nat -A POSTROUTING -s $OCSERV_SUBNET -o eth0 -j MASQUERADE || echo "[Error] No permission to operate iptables."
 iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu || echo "        Run container with option \"--cap-add=NET_ADMIN\"."
 
 # Enable TUN device
