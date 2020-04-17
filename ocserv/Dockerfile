@@ -37,7 +37,8 @@ RUN apk add --no-cache iptables gnutls readline libseccomp libnl3 http-parser ta
     mkdir /var/lib/ocserv && \
     chmod +x /entrypoint.sh
 
-ENV TERM xterm
+ENV TERM xterm \
+    OCSERV_SUBNET 10.0.1.0/24
 
 EXPOSE 443/tcp 443/udp
 
