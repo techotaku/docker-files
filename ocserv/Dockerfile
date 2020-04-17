@@ -1,8 +1,13 @@
-FROM alpine AS builder
+FROM alpine
+
+LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 ARG OC_VERSION=1.0.1
 
-RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev protobuf-c-dev talloc-dev http-parser-dev krb5-dev && \
+COPY entrypoint.sh /entrypoint.sh
+
+RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev protobuf-c-dev talloc-dev http-parser-dev krb5-dev \
+    iptables gnutls readline libseccomp libnl3 http-parser talloc lz4-libs krb5-libs libev protobuf-c geoip && \
     set -x && \
     cd /root && \
     RADCLI_VERSION=`curl -s "https://github.com/radcli/radcli/releases/latest" | sed -n 's/^.*tag\/\(.*\)".*/\1/p'` && \
@@ -20,20 +25,11 @@ RUN apk add --no-cache curl build-base xz linux-headers musl-dev gnutls-dev read
     cd ocserv-$OC_VERSION && \
     ./configure && \
     make -j"$(nproc)" && \
-    make install
-
-FROM alpine
-
-LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
-
-COPY entrypoint.sh /entrypoint.sh
-COPY --from=builder /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so.4.3.0
-COPY --from=builder /usr/local/bin/* /usr/local/bin/
-COPY --from=builder /usr/local/sbin/* /usr/local/sbin/
-
-RUN apk add --no-cache iptables gnutls readline libseccomp libnl3 http-parser talloc lz4-libs krb5-libs libev protobuf-c geoip && \
-    ln -s /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so.4 && \
-    ln -s /usr/local/lib/libradcli.so.4.3.0 /usr/local/lib/libradcli.so && \
+    make install && \
+    apk del --no-cache build-base xz linux-headers musl-dev gnutls-dev readline-dev libnl3-dev lz4-dev libseccomp-dev libev-dev geoip-dev protobuf-c-dev talloc-dev http-parser-dev krb5-dev && \
+    cd /root && \
+    rm -rf radcli-$RADCLI_VERSION && \
+    rm -rf ocserv-$OC_VERSION && \
     mkdir /var/lib/ocserv && \
     chmod +x /entrypoint.sh
 
