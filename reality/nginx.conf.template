@@ -10,7 +10,7 @@ events {
 
 stream {
     server {
-        listen     80;
+        listen     8080;
         proxy_pass {{REALITY_DEST_HOST}}:80;
     }
 
