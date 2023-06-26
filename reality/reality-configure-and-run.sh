@@ -13,3 +13,5 @@ hjson -j < config.json > config.json
 popd
 
 echo "[Info] Configuration updated."
+
+exec /usr/local/bin/xray -config /etc/xray/config.json
