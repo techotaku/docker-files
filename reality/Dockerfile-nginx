@@ -4,7 +4,8 @@ LABEL maintainer "Ian Li <OpenSource@ianli.xyz>"
 
 USER root
 
-RUN apt-get update && apt-get install -y curl nano ca-certificates tzdata && \    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+RUN apt-get update && apt-get install -y curl nano ca-certificates tzdata && \
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
     curl -O https://raw.githubusercontent.com/tests-always-included/mo/master/mo && \
     mv mo /usr/local/bin && \
     chmod +x /usr/local/bin/mo && \
